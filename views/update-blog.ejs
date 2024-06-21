@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form data-id="<%= blog._id %>" action="/update" method="post" enctype="application/x-www-form-urlencoded" id="blog-update-form">
+                
+        <input type="hidden" name="id" value="<%= blog._id %>">
+                <div class="">
+                    <input type="text" placeholder="Title" value="<%= blog.title %>" name="title">  
+                </div>
+                <br>
+                <div>
+                    <textarea name="content" class="" rows="5" cols="20" placeholder="obj_id">
+                        <%= blog.content %>
+                    </textarea>
+                </div>
+                <br>
+                <!-- <div class="imgupload">
+                    <input type="file" name="uploader" id="uploader" placeholder="upload image file">
+                </div> -->
+                
+
+                <br>
+                <div id="controls">
+                    <input type="submit" name="update" id="update" value="Update">
+                    <input type="reset" placeholder="" name="reset" id="reset" value="reset">
+                </div>
+     </form>
+</body>
+</html>

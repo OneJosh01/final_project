@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Blogs</title>
+</head>
+<body>
+    <div class="">
+        <h1>Please select the blog you want to delete</h1>
+        <ul style="display: flex; flex-wrap: wrap; gap: 30px;" type="none">
+        <% blogs.forEach(blog => { %>
+            <li>
+                <img width="200px" src="/uploads/<%=  blog.img_url %>">
+                <p><%= blog.uploader %></p>
+                <p><%= blog._id %></p>
+                <h4><%= blog.title %></h4>
+                <p><%= blog.content %></p>
+                <form method="post" action="/delete">
+                    <input type="hidden" name="id" value="<%= blog._id %>">
+                    <button data-id="<%= blog._id %>">Delete Blog</button>
+                </form>
+            </li>
+        <%}); %>
+    </ul>   
+        <!-- <form action="/home" method="post" enctype="multipart/form-data" class="">
+                
+                <div class="">
+                    <input type="text" placeholder="Title" name="title">  
+                </div>
+                <br>
+                <div>
+                    <textarea class="" rows="5" cols="20" placeholder="obj_id"></textarea>
+                </div>
+                <br>
+                <div class="imgupload">
+                    <input type="file" name="uploader" id="uploader" placeholder="upload image file">
+                </div>
+                
+
+                <br>
+                <div id="controls">
+                    <input type="submit" placeholder="" name="upload" id="upload" value="upload">
+                    <input type="reset" placeholder="" name="reset" id="reset" value="reset">
+                </div>
+        </form> -->
+    </div>
+    <script src="/script/update.js"></script>
+
+    
+</body>
+</html>
+
+                <!-- <label for="">BLOG CATEGORIES</label>
+                <select id="blog">
+                    <option value="">entertainment</option>
+                    <option value="">movies</option>
+                    <option value="">sport</option>
+                </select> -->

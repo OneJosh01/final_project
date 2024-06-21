@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read Blogs</title>
+</head>
+<body>
+    <h1>Blogs</h1>
+    <ul style="display: flex; flex-wrap: wrap; gap: 30px;" type="none">
+        <% blogs.forEach(blog => { %>
+            <li>
+                <img width="200px" src="/uploads/<%=  blog.img_url %>">
+                <p><%= blog.uploader %></p>
+                <p><%= blog._id %></p>
+                <h4><%= blog.title %></h4>
+                <p><%= blog.content %></p>
+            </li>
+        <%}); %>
+    </ul>
+    
+</body>
+</html>

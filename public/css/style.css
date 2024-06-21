@@ -1,0 +1,294 @@
+/* *{
+    box-sizing: border-box;
+    margin: 0;
+    
+} */
+
+/* body{
+    background-color: green;
+    
+} */
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+/* body{
+     background-color: 
+} */
+
+#container{
+    display: grid;
+    grid-template-areas: "aside nav nav nav"
+            "aside card1 card1 card1"
+            "aside foot foot foot";
+    /* gap: 2rem; */
+    /* height: 100vh; */
+    position: relative;
+}
+nav{
+    /* border:.2rem solid blue; */
+    grid-area: nav;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    gap: 2rem;
+    background-color: whitesmoke;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+} 
+ nav>figure{
+    /* border: .2rem solid green; */
+    display: grid;
+    justify-items: start;
+    margin-left: 2rem;
+    /* width: 30%; */
+} 
+
+nav>#profile{
+    /* border: .2rem solid whitesmoke; */
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items:end;
+    margin-right: 2rem;
+    position: relative;
+}
+/* drop profile */
+#droprof{
+    background-color:whitesmoke;
+    position: absolute;
+    display: grid;
+    top:2rem;
+    padding: 1rem;
+    /* border: .2rem ridge black; */
+}
+#dropoff{
+    display: none;
+}
+nav>form{
+    /* border: .2rem ridge yellow; */
+    display: flex;
+}
+
+/* from here */
+
+form>input[type="search"]{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2rem;
+    outline: none;
+}
+ .aside{
+    height:100vh;
+    /* border:.2rem solid green; */
+    grid-area: aside;
+    padding:0.5rem;
+    background-color: rgb(243, 24, 199);
+    color: aliceblue;
+    display: grid;
+    gap:0.5rem;
+    position: relative;
+} 
+header{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+    position: sticky;
+    top: 2rem;
+    bottom: 0;
+    /* color: black; */
+    /* align-items: center; */
+    /* background-color: whitesmoke; */
+}
+header>h3{
+    font-size: xx-large;
+}
+
+/* pages */
+.hide{
+    display: none;
+}
+ .create{
+    background-color: black;
+} 
+.create>ul>li>a{
+    text-decoration: none;
+    color: aliceblue;
+    font-size: 1rem;
+}
+.create>h3{
+    cursor: default;
+}
+.show{
+    display: block;
+} 
+
+
+.viewpage{
+    /* border:.2rem solid red; */
+    grid-area: card1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(217, 217, 223);
+}
+#modal{
+    border: .2rem solid blue;
+    position: absolute;
+    top:20%;
+    left:auto;
+    right: 30rem;
+    color: aliceblue;
+    background-color: black;
+    text-align: center;
+}
+/* dynamic page id */
+#form{
+    /* border: .2rem solid coral; */
+    padding: 2rem;
+}
+#form>form{
+    border: .2rem solid whitesmoke;
+    display: grid;
+    gap: .8rem;
+    border-radius: 10%;
+    padding: 1rem;
+}
+/* #picupload, #pdtprice, #price{
+     border: .2rem dashed red; 
+} */
+#picupload>input[type="file"], 
+#controls>input[type="submit"], 
+#controls>input[type="reset"]{
+    outline: none;
+    font-size: 1rem;
+}
+#pdtprice>input[type="text"],
+#price>input[type="number"],
+select{
+    outline: none;
+    font-size: 2rem;
+}
+/* products card */
+#trayProdt{
+    /* border: .2rem solid red; */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 4rem;
+}
+
+#trayProdt>#card{
+    /* border: .2rem solid blue; */
+    padding: 2rem;
+    background-color: white;
+}
+textarea{
+    outline: none;
+    resize: none;
+}
+.foot{
+    height: 10vh;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    border: .2rem solid whitesmoke;
+    grid-area: foot;
+    background-color: whitesmoke;
+}
+.great1{
+    width: 100%;
+    height: 100%;
+    border: 3px solid blue;
+    padding: 6px;
+    background-color: rgb(73, 73, 117);
+    border-radius: 6px;
+    /* border: 2px solid blue; */
+}
+
+.one{
+    /* width: 50%;
+    height: 50%; */
+}
+
+#frombdy{
+   background-color: blueviolet; 
+}
+
+.fromreg{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    /* background-color: blueviolet;    */
+}
+/* for the login form */
+.login_container{
+    padding: 100px 600px;
+    border: 1px solid green;
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+}
+
+/* .login_body{
+    background-color: brown;
+} */
+
+.login_mail{
+    padding: 10px 10px;
+     /* border-radius: ;  */
+    
+}
+.login_password{
+    padding: 10px 10px;
+     /* border-radius: ;  */
+    
+}
+.login_s{
+    background-color: aquamarine;
+}
+.login_submit{
+    padding: 10px ;
+    background-color: aqua;
+    width: 200px;
+
+     /* border-radius: ;  */
+        
+    
+}
+.login_reset{
+    padding: 10px ;
+    width: 200px
+     /* border-radius: ;      */
+    
+}
+
+/* for the register form */
+.reg_container{
+    padding: 100px 600px;
+}
+.reg_body{
+    background-color: pink;
+}
+
+.reg_mail{
+    padding: 10px 10px;
+}
+.reg_firstname{
+    padding: 10px 10px;
+}
+.reg_lastname{
+    padding: 10px 10px;
+}
+.reg_password{
+    padding: 10px 10px;
+}
+.reg_submit{
+    padding: 10px;
+    width: 200px;
+}
+.reg_reset{
+    padding: 10px;
+    width: 200px;
+}
