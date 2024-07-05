@@ -1,0 +1,52 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.reg_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    /* padding: 100px 600px; */
+}
+.subreg{
+    border: 3px double brown;
+    padding: 40px;
+    background-color: white;
+
+}
+
+.reg_body{
+    /* background-color: pink; */
+}
+.controls{
+    display: flex;
+}
+
+.reg_firstname{
+    padding: 10px;
+    border-radius: 5px;
+}
+.reg_lastname{
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.reg_mail{
+    padding: 10px;
+    border-radius: 5px;
+}
+.reg_password{
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.reg_submit{
+    padding: 10px;
+    width: 194px;
+    background-color: skyblue;
+    border-radius: 5px;
+}

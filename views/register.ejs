@@ -4,38 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>register</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/reg.css">
 </head>
 <body class="reg_body">
-    <form action="/register" method="post">
+    <form method="post" id="form">    
         <div class="reg_container">
-            <h3 style="color: black;">REGISTER</h3>
+            <div class="subreg">
+                <h3 style="color: black; font-size: smaller; font-style: oblique;">Register first to login</h3>
+                <div id="errormessage" style="color: red;"></div>
             <br>
             <div>
-                <input type="text" placeholder="Enter your firstname" name="firstname" id="firstname" class="reg_firstname">
+                <label for="">Firstname</label><br>
+                <input type="text" placeholder="" name="firstname" id="firstname" class="reg_firstname">
+                <p></p>
             </div>
             <br>
             <div>
-                <input type="text" placeholder="Enter your lastname" name="lastname" id="lastname" class="reg_lastname">
+                <label for="">Lastname</label><br>
+                <input type="text" placeholder="" name="lastname" id="lastname" class="reg_lastname">
+                <p></p>
             </div>
             <br>
             <div>
-                <input type="email" placeholder="enter your email" name="email" id="email" class="reg_mail">
+                <label for="">Email</label><br>
+                <input type="email" placeholder="" name="email" id="email" class="reg_mail">
+                <p></p>
             </div>
             <br>
             <div>
-                <input type="password" placeholder="enter your password" name="password" id="password" class="reg_password">
+                <label for="">Password</label><br>
+                <input type="password" placeholder="" name="password" id="password" class="reg_password">
+                <p></p>
             </div>
             <br>
-    
-            <div>
-                <input type="submit" placeholder="" value="submit" name="submit" id="submit" class="reg_submit">
+            <div class="submit_div">
+                <button id="submit" class="reg_submit">SUBMIT</button>
             </div>
             <br>
             <div>
-                <input type="reset" placeholder="" value="cancel" name="reset" id="reset" class="reg_reset">
+            <div class="controls">
+                <h4 style="font-size: smaller; font-style: unset;">Already have an account?</h4>
+                <h5><a href="/login" style="font-size: smaller;">Log in</a></h5>
+            </div>
+
             </div>
         </div>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"></script>
+    <script src="/script/reg.js"></script>
 </body>
 </html>

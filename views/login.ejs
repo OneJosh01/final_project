@@ -3,32 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 <body class="login_body">
-    <form action="/login" method="post">
+    <form method="post" id="form">
        <div class="login_container">
-        <h3 style="color: white; padding: 0px 0px;">LOGIN</h3>
-        <br>
-        <div>
-            <input type="email" placeholder="enter your email" name="email" id="email" class="login_mail">
-        </div>
-        <br>
-        <div>
-            <input type="password" placeholder="enter your password" name="password" id="password" class="login_password">
-        </div>
-        <br>
-
-        <div class="dlogin_s">
-            <input type="submit" placeholder="" value="submit" name="submit" id="submit" class="login_submit">
-        </div>
-        <br>
-        <div>
-            <input type="reset" placeholder="" value="cancel" name="reset" id="reset" class="login_reset">
+        <div class="sublogin">
+            <h3 style="color: black; font-size: smaller; font-style: normal;">Login. First, create your account</h3>
+            <br>
+            <div>
+                <label for="">Email</label><br>
+                <input type="email" placeholder="name@email.com" name="email" id="email" class="login_mail">
+                <p></p>
+            </div>
+            <br>
+            <div>
+                <label for="">Password</label><br>
+                <input type="password" placeholder="enter your password" name="password" id="password" class="login_password">
+                <p></p>
+            </div>
+            <br>
+    
+            <div>
+                <button id="sub_btn" class="btn">SUBMIT</button>
+            </div>
+            <br>
+            <div class="controls">
+                <h4 style="font-size: smaller;">Not registered yet?</h4>
+                <a href="/register" style="font-size: smaller;">create account</a>
+            </div>
         </div>
        </div>
-    </form>
-    
+    </form> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"></script>
+    <script src="/script/login.js"></script>  
 </body>
 </html>

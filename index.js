@@ -11,6 +11,8 @@ dotenv.config()
 const bcrypt = require("bcrypt")
 const multer = require("multer")
 const session = require("express-session")
+const jwt = require("jsonwebtoken")
+const secret_key = "jgghfhfshfhgfhgghhvhcfchgxhfghvdhgsgvs"
 
 server.use(cors())
 server.use(express.static(path.join(__dirname, "public")))
@@ -49,6 +51,7 @@ server.get("/register", (req, res)=>{
 
 
 
+
 // set up multer
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -60,11 +63,6 @@ const storage = multer.diskStorage({
 })
 const uploads = multer({storage:storage})
 server.post("/home", uploads.single("uploader"), async(req, res)=>{
-    // if(req.file.size<=2000){
-    //     console.log("confirm image size");
-    // }else{
-    //     console.log("image size is lesser");
-    // }
     const title = req.body.title.trim()
     const content = req.body.content.trim()
     const uploader = req.file.filename.trim()
@@ -124,6 +122,139 @@ server.post("/delete", async(req, res)=>{
      res.redirect("/home");
 
 })
+
+
+server.get("/update/:blogId", async (req, res) => {
+    let params = req.params;
+    const id = new mongodb.ObjectId(params.blogId);
+
+    console.log("Id:", id);
+
+    const blog = await client.db("projectDB").collection("blogs").findOne({_id: id})
+    
+    console.log("Blog:", blog);
+    
+res.render('update-blog', { blog });
+})
+
+
+server.post("/update", async(req, res) => {
+    const title = req.body.title.trim();
+    const content = req.body.content.trim()
+    const blogId = new mongodb.ObjectId(req.body.id.trim());
+
+    // console.log("Request body: ", req.body)
+
+    // const blogId = new mongodb.ObjectId(req.params.blogId);
+    const update = { $set: { title, content }}
+    await client.db("projectDB").collection("blogs").findOneAndUpdate({_id: blogId}, update).then(() => {
+        res.redirect("/home")
+    })
+
+})
+server.post("/login", async(req, res) => {
+    const email = req.body.email.trim()
+    const password = req.body.password.trim()
+    const confirm_email_in_db = await client.db("projectDB").collection("blogs").findOne({email:email})
+    console.log(confirm_email_in_db)
+    if(confirm_email_in_db){
+        const valid_password = confirm_email_in_db.password
+        const check_password = await bcrypt.compare(password, valid_password)
+        if(check_password){
+            const userdetails = {
+                email: email,
+                password: password
+            }
+           const token = jwt.sign(userdetails, secret_key, expiresIn = null)
+           if(token){
+            // res.send({
+            //     message: "user login successful",
+            //     code: "success",
+            //     data: {
+            //         email: email,
+            //         token: token
+            //     }
+            // })
+           }
+        }else{
+            res.send({
+                message: "password mismatch",
+                code: "error"
+            })
+        }
+    }else{
+        res.send({
+            message: "Account not found, have you registered",
+            code: "error"
+        })
+    }
+
+    // jwt.verify(req.token, "signin", function(error, user_data){ 
+    //     // if(error){
+    //     //     res.status(403).send({
+    //     //       message: "not an authorized user"  
+    //     //     })
+    //     // }
+    //     // res.status(200).send({
+    //     //     message: "user logged in successfully",
+    //     //     data:user_data
+    //     // })
+    // })    
+})
+server.post("/register", async(req, res) => {
+    const firstname = req.body.firstname.trim()
+    const lastname = req.body.lastname.trim()
+    const email = req.body.email.trim()
+    const password = req.body.password.trim()
+    const check_if_email_exists = await client.db("projectDB").collection("blogs").findOne({email:email});
+    if(check_if_email_exists){
+        res.send({
+            message:"account could not be created",
+            code: "error",
+            reason: "email already in use "
+        })
+
+    }else{
+        const hashpassword = await bcrypt.hash(password, 10)
+        const obj = {
+            firstname:firstname,
+            lastname:lastname,
+            email:email,
+            password:hashpassword
+
+        }
+        const store = client.db("projectDB").collection("blogs").insertOne(obj)
+        res.send({
+            message:"account successfully created",
+            code:"true",
+            data:{
+                firstname:firstname,
+                lastname:lastname,
+                email:email,
+                password:hashpassword
+
+            }
+            
+        })
+    }
+
+})
+
+
+server.listen(port, (err)=>{
+    if(err){
+        console.log(err);
+    }
+    console.log('server is running on port' + port);
+})
+
+
+
+
+
+
+
+
 // console.log(title)
 //         const updateuser = client.db("sampleDB").collection("admin").findOneAndUpdate({email:email}, {$set:{firstname: updatedfirstname}})
 //         if(updateuser){
@@ -205,40 +336,3 @@ server.post("/delete", async(req, res)=>{
 // })
 // server.post("/delete", (req, res)=>{
 // })
-
-server.get("/update/:blogId", async (req, res) => {
-    let params = req.params;
-    const id = new mongodb.ObjectId(params.blogId);
-
-    console.log("Id:", id);
-
-    const blog = await client.db("projectDB").collection("blogs").findOne({_id: id})
-    
-    console.log("Blog:", blog);
-    
-res.render('update-blog', { blog });
-})
-
-
-server.post("/update", async(req, res) => {
-    const title = req.body.title.trim();
-    const content = req.body.content.trim()
-    const blogId = new mongodb.ObjectId(req.body.id.trim());
-
-    // console.log("Request body: ", req.body)
-
-    // const blogId = new mongodb.ObjectId(req.params.blogId);
-    const update = { $set: { title, content }}
-    await client.db("projectDB").collection("blogs").findOneAndUpdate({_id: blogId}, update).then(() => {
-        res.redirect("/home")
-    })
-
-})
-
-
-server.listen(port, (err)=>{
-    if(err){
-        console.log(err);
-    }
-    console.log('server is running on port' + port);
-})
