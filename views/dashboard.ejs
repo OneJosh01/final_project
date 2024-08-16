@@ -10,11 +10,11 @@
     <div id="container">
         <nav>
             <figure>
-                <img src="assets/logo3.jpg" alt="logo" srcset="" width="20%">
-                <figcaption>brands logo</figcaption>
+                <img src="/assets/oneJ1.png" srcset="" width="7%">
+                <figcaption></figcaption>
             </figure>
             <form action="" method="post">
-                <input type="search" name="" placeholder="search product by category" id="">
+                <input type="search" name="" placeholder="search product by category" id="" style="font-size: small;">
                 <button type="button">
                     <i class="fas fa-search"></i>
                 </button>
@@ -49,10 +49,8 @@
                 </div>
                 <div class="read">
                      <h3><a href="#" id="bg">Read Blog</a></h3> 
-                     <!-- <ul>
-                        <li><a href="#" id="bg">read blog</a></li>
-                    </ul>
-                </div> -->
+                     
+                </div>
                 <div class="update">
                     <h3><a href="#" id="upd">Update Blog</a></h3>
                 </div>
@@ -80,8 +78,11 @@
                 <div class="admin profile">
                     <h3>Admins profile</h3>
                     <ul type="none" display="hide">
-                        <li><a href="#" id="pdtUp">sign in</a></li>   
+                        <!-- <li><a href="#" id="pdtUp">Logout</a></li>    -->
                     </ul>
+                    <div>
+                        <button id="logoutButton">Logout</button>
+                    </div>
                    
                 </div>
                 <div class="settings">
@@ -91,14 +92,14 @@
         </aside>
         <div class="viewpage">
             <!-- dashboard page view -->
-            <div id="form">
+            <div id="form" style="width: 100%">
 
             </div>
         </div>
         <footer class="foot">
             <div class="artisan">
                 <i>Design With <i class="fas fa-heart fa-1.5x" style="color:red;">
-                </i> of  Diamond by <a href="#" style="text-decoration: none;color:black;">CORRECTBOY</a></i>
+                </i> of  Diamond by <a href="#" style="text-decoration: none;color:black;">ONEJOSH</a></i>
             </div>
         </footer>
     </div>
@@ -127,5 +128,16 @@
        <script src="https://kit.fontawesome.com/da9f1955d4.js" crossorigin="anonymous"></script>  
     <script src="/third/jq.js"></script>
     <script src="/script/dash.js"></script>
+    <script>
+         let logout_button = document.querySelector("#logoutButton")
+       logout_button.addEventListener("click", function (){
+        const tokenName = 'loginToken';
+    
+        // Set the cookie's expiration date to the past to delete it
+        document.cookie = `${tokenName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        location.href = '/login'
+       })
+
+    </script>
 </body>
 </html>

@@ -11,9 +11,9 @@
         <ul style="display: flex; flex-wrap: wrap; gap: 30px;" type="none">
         <% blogs.forEach(blog => { %>
             <li>
-                <img width="200px" src="/uploads/<%=  blog.img_url %>">
-                <p><%= blog.uploader %></p>
-                <p><%= blog._id %></p>
+                <img width="200px" height="200px" src="/uploads/<%=  blog.img_url %>">
+                <!-- <p><%= blog.uploader %></p> -->
+                <!-- <p><%= blog._id %></p> -->
                 <h4><%= blog.title %></h4>
                 <p><%= blog.content %></p>
                 <form method="post" action="/delete">
@@ -22,7 +22,7 @@
                 </form>
             </li>
         <%}); %>
-    </ul>   
+        </ul>   
         <!-- <form action="/home" method="post" enctype="multipart/form-data" class="">
                 
                 <div class="">
@@ -51,9 +51,4 @@
 </body>
 </html>
 
-                <!-- <label for="">BLOG CATEGORIES</label>
-                <select id="blog">
-                    <option value="">entertainment</option>
-                    <option value="">movies</option>
-                    <option value="">sport</option>
-                </select> -->
+               

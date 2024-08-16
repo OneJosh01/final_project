@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/loads.css">
 </head>
 <body>
     <div class="great">
         <form action="/home" method="post" enctype="multipart/form-data" class="load_form">
                 
                 <div class="one">
-                    <input type="text" placeholder="Title" name="" id="title">  
+                    <input type="text" placeholder="Title" name="title" id="title">  
                 </div>
                 <br>
-                <div>
-                    <textarea name="content" id="" placeholder="create a blog content" cols="35" rows="15"></textarea>
+                <div class="text_parent">
+                    <textarea name="content" id="form_load" class="form_load" placeholder="create a blog content"></textarea>
                     <!-- <input type="text" placeholder="content" name="content"> -->
                 </div>
                 <br>
@@ -30,10 +30,13 @@
                 </select>  -->
                 <br>
                 <div id="controls">
-                    <input type="submit" placeholder="" name="upload" id="upload" value="upload">
-                    <input type="reset" placeholder="" name="reset" id="reset" value="reset">
+                     <input type="submit" placeholder="" name="upload" id="upload" value="upload" class="btnloader"> 
+                    <!-- <button id="sub_btn" class="">submit</button> -->
+                    <!-- <button id="res_btn" class="">reset</button> -->
+                    <input type="reset" placeholder="" name="reset" id="reset" value="reset" class="resloader"> 
                 </div>
         </form>
     </div>
+
 </body>
 </html>

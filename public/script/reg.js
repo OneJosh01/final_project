@@ -53,18 +53,20 @@ form.addEventListener("submit", function(e){
         // lastnamepara.style.display = "none"
         // emailpara.style.display = "none"
         // passwordpara.style.display = "none"
-
+        
+// form data sent to server using axios
         axios.post("http://localhost:8000/register", {
             firstname: firstnameValue,
             lastname: lastnameValue,
             email: emailValue,
             password: passwordValue
         }).then((feedback) => {
+            console.log(feedback)
             if(feedback.data.code == "error"){
                 document.getElementById("errormessage").innerText = feedback.data.message
             }
-            console.log(feedback)
         })
+        // window.location.href = "/dashboard"
 
     }
 

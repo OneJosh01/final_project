@@ -1,5 +1,8 @@
 const express = require("express")
+// use express as template engine
 const server = express()
+
+// Require dependencies
 const path = require ("path")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
@@ -14,39 +17,114 @@ const session = require("express-session")
 const jwt = require("jsonwebtoken")
 const secret_key = "jgghfhfshfhgfhgghhvhcfchgxhfghvdhgsgvs"
 
+// Use the dependencies
 server.use(cors())
-server.use(express.static(path.join(__dirname, "public")))
-server.use(bodyParser.urlencoded({extended:false}))
+server.use(express.static(path.join(__dirname, "public"))) // give server access to the public folder in the project root directory
+server.use(bodyParser.urlencoded({extended:false})) // give server access to use and to parse messages with clients 
 server.use(bodyParser.json())
-server.use(cookieParser())
+server.use(cookieParser()) // give server access to use and parse clients cookies
 server.use(session({secret:"your secret key"}))
+
+// Templating engine
 server.set("view engine", "ejs")
 const port = process.env.port
 // const admin = process.env.TABLE
 // const sampleDB = process.env.DB_NAME
 
+
+// jwt middleware for the user creation
+const verifyUserToken = function(req, res, next){
+    const token = req.cookies.loginToken
+    // console.log("from token: ", token)
+    try{
+        const verify = jwt.verify(token, secret_key)
+        loggedinuser = verify.email
+        // console.log("from verify: ", verify)
+
+    }catch(error){
+        //  console.log("from jwt error: ", error.message)
+         res.redirect("/login")
+    }
+
+    next()
+
+}
+// jwt middleware for the admin creation
+const verifyAdminToken = async function(req, res, next){
+      
+    try{
+         const token = req.cookies.loginToken
+         console.log("from token", token)
+         const verify = jwt.verify(token, secret_key)  
+        //  console.log(verify)
+         email = verify.email
+         findAdmin = await client.db("projectDB").collection("user").findOne({email: email});
+         is_an_admin = findAdmin.is_an_admin
+         if(!is_an_admin || typeof(is_an_admin) == undefined){
+            res.redirect("/blogs")
+         }else{
+            res.render("dashboard")
+
+         }
+        //   console.log("from verify:", verify)
+    }catch(error){
+        console.log("from jwt error:", error.message)
+        
+        return res.redirect("/blogs")
+    }
+    next()
+    
+}
+
+
+
+
 //home route
-server.get("/home", (req, res)=>{
-    res.render("dashboard")
+// this is where the jwt middleware for admin is used
+server.get("/home", verifyAdminToken, (req, res)=>{
 })
-// product upload route
-server.get("/uploadproduct", (req, res)=>{
-    res.render("uploads")
-})
+// product upload route not in use
+// server.get("/uploadproduct", (req, res)=>{
+//     res.render("uploads")
+// })
 // blogs view route
 server.get("/loads",(req, res)=>{
     res.render("loads")
 })
-server.get("/defaultpage", (req, res)=>{
-    res.render("defaultpage")
+// landingpage route
+server.get("/", (req, res)=>{
+    res.render("landingpage")
 })
+// login route
 server.get("/login", (req, res)=>{
-    res.render("login")
+    const token = req.cookies.loginToken
+    console.log(token)
+    if(token){
+        res.redirect("blogs") 
+    }else{
+        res.render("login")
+    }
+})
 
-})
+
+// register route
 server.get("/register", (req, res)=>{
-    res.render("register")
+    const token = req.cookies.loginToken
+    console.log(token)
+    if(token){
+        res.redirect("blogs") 
+    }else{
+        res.render("register")
+    }
 })
+server.get("/about", (req, res)=>{
+    res.render("about")
+})
+server.get("/frequently-asked-question", (req, res)=>{
+    res.render("faq")
+})
+
+
 
 
 
@@ -79,7 +157,9 @@ server.post("/home", uploads.single("uploader"), async(req, res)=>{
 
 })
 
-server.get("/blogs", async(req, res)=>{
+// this is where the jwt middleware for user is used
+server.get("/blogs", verifyUserToken, async(req, res)=>{
+
     const db = client.db("projectDB").collection("blogs").find();
     let records = [];
     for await (const doc of db) {
@@ -89,25 +169,30 @@ server.get("/blogs", async(req, res)=>{
      res.render("blogs", {blogs: records})
      
 })
+server.get("/admin/blogs", async (req, res)=>{
+    const db = await client.db("projectDB").collection("blogs").find().toArray();
+    // console.log(db)
+    res.send(db || [])
+     
+})
+
+
 
 //  update route
 server.get("/update", async(req, res)=>{
     const db = client.db("projectDB").collection("blogs").find();
     let records = [];
     for await (const doc of db) {
-        records.push(doc);
-        
+        records.push(doc);    
     }
      res.render("update", {blogs: records});
-
 })
 
 server.get("/delete", async(req, res)=>{
     const db = client.db("projectDB").collection("blogs").find();
     let records = [];
     for await (const doc of db) {
-        records.push(doc);
-        
+        records.push(doc);     
     }
      res.render("delete", {blogs: records});
 
@@ -152,10 +237,11 @@ server.post("/update", async(req, res) => {
     })
 
 })
+// client sending a post request to the server 
 server.post("/login", async(req, res) => {
     const email = req.body.email.trim()
     const password = req.body.password.trim()
-    const confirm_email_in_db = await client.db("projectDB").collection("blogs").findOne({email:email})
+    const confirm_email_in_db = await client.db("projectDB").collection("user").findOne({email:email})
     console.log(confirm_email_in_db)
     if(confirm_email_in_db){
         const valid_password = confirm_email_in_db.password
@@ -167,15 +253,39 @@ server.post("/login", async(req, res) => {
             }
            const token = jwt.sign(userdetails, secret_key, expiresIn = null)
            if(token){
-            // res.send({
-            //     message: "user login successful",
-            //     code: "success",
-            //     data: {
-            //         email: email,
-            //         token: token
-            //     }
-            // })
+            const check_if_user_is_an_admin = await client.db("projectDB").collection("user").findOne({email:email})
+            console.log(check_if_user_is_an_admin)
+            const is_an_admin = check_if_user_is_an_admin.is_an_admin
+            res.cookie("loginToken", token)
+
+
+            if(is_an_admin){
+
+                res.send({
+                    message: "login successful",
+                    user: "admin",
+                    code : "success",
+                    data: {
+                        email: email,
+                        token: token
+                    }
+                })
+                
+            }else{
+                res.send({
+                    message: "a user",
+                    code: "success",
+                    data: {
+                        email: email,
+                        token: token
+                    }
+
+                })
+            }
+           
            }
+
+           
         }else{
             res.send({
                 message: "password mismatch",
@@ -206,7 +316,8 @@ server.post("/register", async(req, res) => {
     const lastname = req.body.lastname.trim()
     const email = req.body.email.trim()
     const password = req.body.password.trim()
-    const check_if_email_exists = await client.db("projectDB").collection("blogs").findOne({email:email});
+    const check_if_email_exists = await client.db("projectDB").collection("user").findOne({email:email});
+    console.log(check_if_email_exists)
     if(check_if_email_exists){
         res.send({
             message:"account could not be created",
@@ -223,7 +334,7 @@ server.post("/register", async(req, res) => {
             password:hashpassword
 
         }
-        const store = client.db("projectDB").collection("blogs").insertOne(obj)
+        const store = client.db("projectDB").collection("user").insertOne(obj)
         res.send({
             message:"account successfully created",
             code:"true",

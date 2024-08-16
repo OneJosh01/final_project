@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - BlogHub</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .about-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: #343a40;
+        }
+        .about-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .about-tagline {
+            font-size: 1.5rem;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+        .about-text {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: auto;
+        }
+        .about-image {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 100px;">
+        <div class="container" >
+           <a class="navbar-brand" href="/blogs" style="font-size: 40px;">BLOGHUB</a>
+            
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/blogs">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/frequently-asked-question">FAQ</a></li>
+                    <li class="nav-item"><button style="height: 30px; width: 80px; margin: 7px; border-radius: 10px;" id="logoutButton">Logout</button></li>
+                </ul>
+        </div>
+    </nav>
+    <div class="container about-container">
+        
+        <div class="text-center">
+            <img src="data:image/jpeg;base64,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" alt="BlogHub Logo" class="about-image">
+            <h1 class="about-title">About BlogHub</h1>
+            <p class="about-tagline">Your hub for insightful blogs and stories!</p>
+            <p class="about-text">
+                Welcome to BlogHub! We are passionate about sharing insights, tips, and stories 
+                that inspire and inform our readers. Our team is dedicated to providing high-quality 
+                content that resonates with our audience. Join us on our journey as we explore 
+                various topics and engage with our community!
+            </p>
+            <p class="about-text">
+                Our mission is to create a space where knowledge is shared freely and everyone 
+                feels welcome. We believe in the power of words and the impact they can have on 
+                individuals and communities. Thank you for being here with us!
+            </p>
+        </div>
+    </div>
+    <footer class="text-center text-lg-start bg-dark text-light">
+        <section class="p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+          <div class="container">
+            <div class="row d-flex">
+              <div class="col-md-6 col-sm-12 mb-2 mb-md-0 d-flex justify-content-center justify-content-md-start">
+                <div class="">
+                  <div class="input-group" style="max-width: 400px;">
+                    <input type="email" class="form-control border" placeholder="Email" aria-label="Email" aria-describedby="button-addon2" />
+                    <button class="btn btn-light border" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                      Subscribe
+                    </button>
+                  </div>
+                </div>
+              </div>
+            
+      
+             
+            </div>
+          </div>
+        </section>
+      
+        <section class="">
+          <div class="container text-center text-md-start mt-5 mb-4">
+            <div class="row mt-3">
+              <div class="col-12 col-lg-3 col-sm-12">
+                <h1>BLOGHUB</h1>
+              </div>
+      
+              <div class="col-6 col-sm-4 col-lg-2">
+                <h6 class="text-uppercase text-light fw-bold mb-2">
+                  Store
+                </h6>
+                <ul class="list-unstyled mb-4">
+                  <li><a class="text-light" href="#">About us</a></li>
+                  <li><a class="text-light" href="#">Find store</a></li>
+                  <li><a class="text-light" href="#">Categories</a></li>
+                  <li><a class="text-light" href="#">Blogs</a></li>
+                </ul>
+              </div>
+      
+              <div class="col-6 col-sm-4 col-lg-2">
+                <h6 class="text-uppercase text-light fw-bold mb-2">
+                  Information
+                </h6>
+                <ul class="list-unstyled mb-4">
+                  <li><a class="text-light" href="#">Help center</a></li>
+                  <li><a class="text-light" href="#">Money refund</a></li>
+                  <li><a class="text-light" href="#">Shipping info</a></li>
+                  <li><a class="text-light" href="#">Refunds</a></li>
+                </ul>
+              </div>
+      
+              <div class="col-6 col-sm-4 col-lg-2">
+                <h6 class="text-uppercase text-light fw-bold mb-2">
+                  Support
+                </h6>
+                <ul class="list-unstyled mb-4">
+                  <li><a class="text-light" href="#">Help center</a></li>
+                  <li><a class="text-light" href="#">Documents</a></li>
+                  <li><a class="text-light" href="#">Account restore</a></li>
+                  <li><a class="text-light" href="#">My orders</a></li>
+                </ul>
+              </div>
+      
+              <div class="col-12 col-sm-12 col-lg-3">
+                <h6 class="text-uppercase text-light fw-bold mb-2">Our apps</h6>
+                <a href="#" class="mb-2 d-inline-block"> <img src="https://mdbootstrap.com/img/bootstrap-ecommerce/misc/btn-appstore.webp" height="38" /></a>
+                <a href="#" class="mb-2 d-inline-block"> <img src="https://mdbootstrap.com/img/bootstrap-ecommerce/misc/btn-market.webp" height="38" /></a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="container">
+          <div class="py-4 border-top">
+            <div class="d-flex justify-content-between">
+              <div class="text-light">
+                <i class="fab fa-lg fa-cc-visa"></i>
+                <i class="fab fa-lg fa-cc-amex"></i>
+                <i class="fab fa-lg fa-cc-mastercard"></i>
+                <i class="fab fa-lg fa-cc-paypal"></i>
+              </div>
+      
+              <div class="dropdown dropup">
+                <a class="dropdown-toggle text-light" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false"> <i class="flag-united-kingdom flag m-0"></i> English </a>
+      
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="Dropdown">
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English <i class="fa fa-check text-success ms-2"></i></a>
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
+                  </li>
+                </ul>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </footer>
+<script>
+   let logout_button = document.querySelector("#logoutButton")
+       logout_button.addEventListener("click", function (){
+        const tokenName = 'loginToken';
+    
+        // Set the cookie's expiration date to the past to delete it
+        document.cookie = `${tokenName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        location.href = '/login'
+       })
+</script>
+</body>
+</html>

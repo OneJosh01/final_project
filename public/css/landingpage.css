@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.frombdy{
+     background-color: brown;    
+ }
+
+ .fromreg{
+   display: flex;
+   justify-content: space-between;
+   margin: 20px 40px 0px 40px;
+ }
+ 
+  .parent{
+     width: 100%;
+     height: 100vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ } 
+ .logo{
+    width: 5%;
+    height: 5vh;
+ }
+
+ .btn{
+   width: 170px;
+   height: 35px;
+   border-radius: 10px;
+   border: none;
+   margin: 10px 0px 20px 80px;
+   
+ }
+
+ .blog{
+   color: white;
+   font-size: x-large;
+ }
+
+ @media screen and (max-width: 400px) {
+
+   .blog{
+      font-size: small;
+   }
+   
+   .btn{
+      width: 80px;
+      height: 20px;
+      margin: 5px 0px 0px 53px;
+      border-radius:2px;
+      border: none;
+
+   }
+   
+ }
+ /* .parent_container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+  
+ } */
+ /* .our_blog{
+    border: 1px solid red;
+    width: 50%;
+    height: 20vh;
+ } */
+ /* .blog_one{
+    border: 1px solid green;
+    width: 40%;
+    height: 50vh;
+    
+ }
+ .image_one{
+    width: 100%;
+    height: 50vh;
+    background-size: cover;
+    background-position: center;
+    
+ }
+
+ .blog_two{
+    border: 1px solid green;
+    width: 30%;
+    height: 50vh;
+ }
+ .blog_three{
+    border: 1px solid green;
+    width: 30%;
+    height: 50vh;
+ }
+ .blog_four{
+    border: 1px solid green;
+    width: 40%;
+    height: 50vh;
+ }
+ .image_three{
+   width: 100%;
+   height: 50vh;
+   background-size: cover;
+   background-position: center;
+ }
+ .blog_five{
+    border: 1px solid green;
+    width: 30%;
+    height: 50vh;
+ }
+ .image_five{
+   width: 100%;
+   height: 50vh;
+
+ }
+ .blog_six{
+    border: 1px solid green;
+    width: 30%;
+    height: 50vh;
+ }
+ .image_six{
+   width: 100%;
+   height: 50vh;
+ } */
+
+
+
